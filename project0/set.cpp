@@ -1,6 +1,6 @@
 #include "set.h"
 #include<iostream>
-#include <sstream> 
+#include <sstream>
 //=================================================
 // List
 // PARAMETERS:
@@ -38,7 +38,7 @@ Set<T> :: Set (void){
          //cout << head->next->item <<endl;
      }
      else {
-     Node * ptr = head; 
+     Node * ptr = head;
      int exist = 0;
      while(ptr->next){
          if(ptr->item == item){
@@ -73,14 +73,15 @@ template <class T>
          else {
         Node *ptr = head ;
         if(ptr->item == item){
-            Node *ptr = head ;
-            ptr = ptr->next ;
-            head = ptr ;
+            Node *ptr1 = head ;
+            ptr1 = ptr1 ->next ;
+            head = ptr1 ;
         }
         else {
         while(ptr->next->next){
             if(ptr->next->item == item){
                 ptr->next = ptr->next->next;
+                break;
             }
             ptr = ptr->next;
         }
@@ -117,7 +118,7 @@ template <class T>
      else return false ;
  }
 
- template <class T> 
+ template <class T>
  bool Set<T> :: contains (const T &item){
      if(head == NULL){
          return false ;
@@ -133,7 +134,7 @@ template <class T>
      return false ;
  }
 
- template<class T> 
+ template<class T>
  bool Set<T>  :: operator== (const Set<T> & myset) {
      if(head == NULL){
          if(myset.cardinality() == 0) return true ;
@@ -173,7 +174,7 @@ template <class T>
      }
  }
 
- template<class T> 
+ template<class T>
  bool Set<T>  :: operator<= (const Set<T> & myset) {
      int len = 0 ;
      if(head ==NULL){
@@ -214,7 +215,7 @@ template <class T>
      }
  }
 
- template<class T> 
+ template<class T>
  Set<T>  Set<T>  :: operator+ (const Set<T> & myset) {
      //Node* ptr_all = new Node ;
      Set<T> st;
@@ -275,7 +276,7 @@ template <class T>
      }
  }
 
- template<class T> 
+ template<class T>
  Set<T>  Set<T>  :: operator& (const Set<T> & myset) {
      Set<T> ans;
      if(myset.cardinality() ==0 || head == NULL) return ans;
@@ -299,12 +300,14 @@ template <class T>
      return ans;
  }
 
- template<class T> 
+ template<class T>
  Set<T>  Set<T>  :: operator- (const Set<T> & myset) {
     Set<T> ans;
      if(myset.cardinality() ==0 || head == NULL){
          if(myset.cardinality()==0){
+             if(head == NULL) return ans;
              Node *ptr = head;
+             //cout << ptr->item <<endl;
              while(ptr){
                  ans.insert(ptr->item );
                  ptr = ptr->next;
@@ -335,7 +338,7 @@ template <class T>
      return ans;
  }
 
- template<class T> 
+ template<class T>
  string   Set<T>  :: to_string (void)  const {
            stringstream ss;
      if(head == NULL) return ss.str();
