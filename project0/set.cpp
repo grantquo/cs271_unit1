@@ -338,7 +338,7 @@ Set<T> Set<T> :: operator+ (const Set<T> & myset) {
                 ptr2= ptr2->next;
             }
         }
-        return stn ;
+        return st ;
     }
 }
 //=================================================
