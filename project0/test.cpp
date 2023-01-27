@@ -5,6 +5,7 @@
 //  Created by Grant Gutterman and Dong Tran
 //
 #include <iostream>
+#include <chrono>
 #include "set.cpp"
 
 void test_insert() {
@@ -638,6 +639,7 @@ void test_union() {
 
 void test_intersection() {
     try {
+        // int test
         Set<int> s1;
         Set<int> s2;
         string set_str = (s1&s2).to_string();
@@ -657,6 +659,84 @@ void test_intersection() {
         if (set_str != "1 2") {
             cout << "ERROR: Intersection of " << s1.to_string() << " and " << s2.to_string() << " was expected to be 1 2 but instead got : " << set_str << endl; 
         }
+
+        // char test
+        Set<char> t1;
+        Set<char> t2;
+        set_str = (t1&t2).to_string();
+        if (set_str != "") {
+            cout << "ERROR: Intersection of the empty sets should be the empty set. Instead got : " << set_str << endl; 
+        }
+        t1.insert('a');
+        t1.insert('b');
+        t2.insert('z');
+        set_str = (t1&t2).to_string();
+        if (set_str != "") {
+            cout << "ERROR: Intersection of " << t1.to_string() << " and " << t2.to_string() << " was expected to be the empty set but instead got : " << set_str << endl;
+        }
+        t2.insert('b');
+        t2.insert('a');
+        set_str = (t1&t2).to_string();
+        if (set_str != "a b") {
+            cout << "ERROR: Intersection of " << t1.to_string() << " and " << t2.to_string() << " was expected to be a b but instead got : " << set_str << endl;
+        }
+
+        // float test
+        Set<float> u1;
+        Set<float> u2;
+        set_str = (u1&u2).to_string();
+        if (set_str != "") {
+            cout << "ERROR: Intersection of the empty sets should be the empty set. Instead got : " << set_str << endl; 
+        }
+        u1.insert(1.2);
+        u1.insert(3.4);
+        u2.insert(9.9);
+        set_str = (u1&u2).to_string();
+        if (set_str != "") {
+            cout << "ERROR: Intersection of " << u1.to_string() << " and " << u2.to_string() << " was expected to be the empty set but instead got : " << set_str << endl;
+        }
+        u2.insert(3.4);
+        u2.insert(1.2);
+        set_str = (u1&u2).to_string();
+        if (set_str != "1.2 3.4") {
+            cout << "ERROR: Intersection of " << u1.to_string() << " and " << u2.to_string() << " was expected to be 1.2 3.4 but instead got : " << set_str << endl;
+        }
+
+        // bool test
+        Set<bool> v1;
+        Set<bool> v2;
+        set_str = (v1&v2).to_string();
+        if (set_str != "") {
+            cout << "ERROR: Intersection of the empty sets should be the empty set. Instead got : " << set_str << endl;
+        }
+        v1.insert(true);
+        v1.insert(false);
+        v2.insert(false);
+        set_str = (v1&v2).to_string();
+        if (set_str != "0") {
+            cout << "ERROR: Intersection of " << v1.to_string() << " and " << v2.to_string() << " was expected to be 0 but instead got : " << set_str << endl;
+        }
+
+        // string test
+        Set<string> w1;
+        Set<string> w2;
+        set_str = (w1&w2).to_string();
+        if (set_str != "") {
+            cout << "ERROR: Intersection of the empty sets should be the empty set. Instead got : " << set_str << endl;
+        }
+        w1.insert("string111");
+        w1.insert("string222");
+        w2.insert("STRING999");
+        set_str = (w1&w2).to_string();
+        if (set_str != "") {
+            cout << "ERROR: Intersection of " << w1.to_string() << " and " << w2.to_string() << " was expected to be the empty set but instead got : " << set_str << endl;
+        }
+        w2.insert("string222");
+        w2.insert("string111");
+        set_str = (w1&w2).to_string();
+        if (set_str != "string111 string222") {
+            cout << "ERROR: Intersection of " << w1.to_string() << " and " << w2.to_string() << " was expected to be string111 string222 but instead got : " << set_str << endl;
+        }
     }
 
     catch (exception& e) {
@@ -666,24 +746,103 @@ void test_intersection() {
 
 void test_diff() {
     try {
+        // int test
         Set<int> s1;
         Set<int> s2;
         string set_str = (s1-s2).to_string();
-        if(set_str != "") {
+        if (set_str != "") {
             cout << "ERROR: Difference of the empty sets should be the empty set. Instead got : " << set_str << endl;
         }
         s1.insert(1);
         s1.insert(2);
-        s2.insert(6);
+        s2.insert(100);
         set_str = (s1-s2).to_string();
-        if(set_str != "1 2") {
-            cout << "ERROR: Set " << s1.to_string() << " \\ Set " << s2.to_string() << " was expected to be 1 2 set but instead got : " << set_str << endl;
+        if (set_str != "1 2") {
+            cout << "ERROR: Set " << s1.to_string() << " \\ Set " << s2.to_string() << " was expected to be 1 2 but instead got : " << set_str << endl;
         }
         s2.insert(2);
         s2.insert(1);
         set_str = (s1-s2).to_string();
-        if(set_str != "") {
+        if (set_str != "") {
             cout << "ERROR: Set " << s1.to_string() << " \\ Set " << s2.to_string() << " was expected to be the empty set but instead got : " << set_str << endl;
+        }
+
+        // char test
+        Set<char> t1;
+        Set<char> t2;
+        set_str = (t1-t2).to_string();
+        if (set_str != "") {
+            cout << "ERROR: Difference of the empty sets should be the empty set. Instead got : " << set_str << endl;
+        }
+        t1.insert('a');
+        t1.insert('b');
+        t2.insert('z');
+        set_str = (t1-t2).to_string();
+        if (set_str != "a b") {
+            cout << "ERROR: Set " << t1.to_string() << " \\ Set " << t2.to_string() << " was expected to be a b but instead got : " << set_str << endl;
+        }
+        t2.insert('b');
+        t2.insert('a');
+        set_str = (t1-t2).to_string();
+        if (set_str != "") {
+            cout << "ERROR: Set " << t1.to_string() << " \\ Set " << t2.to_string() << " was expected to be the empty set but instead got : " << set_str << endl;
+        }
+
+        // float test
+        Set<float> u1;
+        Set<float> u2;
+        set_str = (u1-u2).to_string();
+        if (set_str != "") {
+            cout << "ERROR: Difference of the empty sets should be the empty set. Instead got : " << set_str << endl;
+        }
+        u1.insert(1.2);
+        u1.insert(3.4);
+        u2.insert(9.9);
+        set_str = (u1-u2).to_string();
+        if (set_str != "1.2 3.4") {
+            cout << "ERROR: Set " << u1.to_string() << " \\ Set " << u2.to_string() << " was expected to be 1.2 3.4 but instead got : " << set_str << endl;
+        }
+        u2.insert(3.4);
+        u2.insert(1.2);
+        set_str = (u1-u2).to_string();
+        if (set_str != "") {
+            cout << "ERROR: Set " << u1.to_string() << " \\ Set " << u2.to_string() << " was expected to be the empty set but instead got : " << set_str << endl;
+        }
+
+        // bool test
+        Set<bool> v1;
+        Set<bool> v2;
+        set_str = (v1-v2).to_string();
+        if (set_str != "") {
+            cout << "ERROR: Difference of the empty sets should be the empty set. Instead got : " << set_str << endl;
+        }
+        v1.insert(true);
+        v1.insert(false);
+        v2.insert(false);
+        set_str = (v1-v2).to_string();
+        if (set_str != "1") {
+            cout << "ERROR: Set " << v1.to_string() << "  \\ Set " << v2.to_string() << " was expected to be 1 but instead got : " << set_str << endl;
+        }
+
+        // string test
+        Set<string> w1;
+        Set<string> w2;
+        set_str = (w1-w2).to_string();
+        if (set_str != "") {
+            cout << "ERROR: Difference of the empty sets should be the empty set. Instead got : " << set_str << endl;
+        }
+        w1.insert("string111");
+        w1.insert("string222");
+        w2.insert("STRING999");
+        set_str = (w1-w2).to_string();
+        if (set_str != "string111 string222") {
+            cout << "Set " << w1.to_string() << " \\ Set " << w2.to_string() << " was expected to be string11 string222 but instead got : " << set_str << endl;
+        }
+        w2.insert("string222");
+        w2.insert("string111");
+        set_str = (w1-w2).to_string();
+        if (set_str != "") {
+            cout << "Set " << w1.to_string() << " \\ Set " << w2.to_string() << " was expected to be the empty set but instead got : " << set_str << endl;
         }
     }
     catch (exception& e) {
