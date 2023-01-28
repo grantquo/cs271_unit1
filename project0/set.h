@@ -1,10 +1,3 @@
-//========================================================
-// Matt Kretchmar
-// October 2022
-// List.h
-// This file contains the List class declaration.  
-//========================================================
-
 #include <iostream>
 #include <string>
 using namespace std;
@@ -24,8 +17,8 @@ private:
 	Node	*head ;		// the pointer for the linked list
 	
 public:
-			Set		( void );
-		  // ~Set			( void );
+			Set			( void );
+		  	// ~Set		( void );
 void		insert		( const T &item	);
 void		remove		( const T &item	);
 int         cardinality (void) const ;

@@ -11,8 +11,6 @@
 //=================================================
 template <class T>
 Set<T> :: Set (void){
-    // cout << (head == NULL)<<endl;
-    //cout << head->item <<endl;
     head = NULL;
 }
 
@@ -30,8 +28,6 @@ void Set<T> :: insert(const T &item ) {
         head = new Node;
         head->item = item ;
 
-    //cout << item<<endl;
-    //cout << head->next->item <<endl;
     }
     else {
         Node * ptr = head;
@@ -47,15 +43,13 @@ void Set<T> :: insert(const T &item ) {
         if(ptr->item == item){
             exist = 1;
         }
-        //delete ptr ;
         if(exist == 0){
         Node * ptr1 = new Node;
         ptr1->item = item ;
         ptr1->next = head ;
         head = ptr1;
-        //delete ptr1 ;
+
         }
-        //delete ptr ;
     }
 }
 
@@ -190,7 +184,6 @@ bool Set<T> :: operator== (const Set<T> & myset) {
         }
         else {
     Node *ptr = head ;
-    //Node * ptr = st2 ;
     int len = 0 ;
     Node *ptr1 = head ;
     while(ptr1){
@@ -250,7 +243,6 @@ bool Set<T> :: operator<= (const Set<T> & myset) {
     }
     else {
         Node*ptr = head ;
-        //Node*ptr1 = myset.head;
         while(ptr){
             int exist = 0;
             Node*ptr1 = myset.head;
@@ -283,7 +275,6 @@ bool Set<T> :: operator<= (const Set<T> & myset) {
 //=================================================
 template<class T>
 Set<T> Set<T> :: operator+ (const Set<T> & myset) {
-    //Node* ptr_all = new Node ;
     Set<T> st;
     if(head == NULL){
         if(myset.cardinality () ==0 ){
@@ -319,7 +310,6 @@ Set<T> Set<T> :: operator+ (const Set<T> & myset) {
         }
         else {
             Node *ptr2 = myset.head;
-            //ptr1->next = new Node;
             while(ptr2){
             int exist = 0;
                 Node *ptr3 = head ;
@@ -357,7 +347,6 @@ Set<T> Set<T> :: operator& (const Set<T> & myset) {
     Set<T> ans;
     if(myset.cardinality() ==0 || head == NULL) return ans ;
     Node *ptr =  head ;
-    //Node *ptr1 = myset.head;
     while(ptr){
         int exist = 0;
         Node *ptr1 = myset.head ;
@@ -393,7 +382,6 @@ Set<T> Set<T> :: operator- (const Set<T> & myset) {
         if(myset.cardinality()==0){
             if(head == NULL) return ans ;
             Node *ptr = head;
-            //cout << ptr->item <<endl;
             while(ptr){
                 ans.insert(ptr->item );
                 ptr = ptr->next;
@@ -405,7 +393,6 @@ Set<T> Set<T> :: operator- (const Set<T> & myset) {
         }
     }
     Node *ptr =  head ;
-    //Node *ptr1 = myset.head;
     while(ptr){
         int exist = 0;
         Node *ptr1 = myset.head ;
@@ -438,16 +425,11 @@ string Set<T> :: to_string (void)  const {
     stringstream ss;
     if(head == NULL) return ss.str() ;
     Node *ptr = head ;
-    //cout << ptr->item <<endl;
     while(ptr->next){
-        // cout << ptr->item <<" ";
         ss << ptr->item ;
         ss <<" ";
-        //ans += " ";
         ptr = ptr->next;
     }
-    //cout <<endl;
-    //cout << ans<<endl;
     ss << ptr->item ;
     return ss.str() ;
 }
