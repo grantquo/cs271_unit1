@@ -1,6 +1,6 @@
 #include <iostream>
 #include  <sstream>
-#include "minqueue."
+#include "minqueue.h"
 
 template<class T> 
 string  sliding_window  (T arr[], int len, int window){

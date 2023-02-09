@@ -1,6 +1,9 @@
+#ifndef MIN_QUEUE_H
+#define MIN_QUEUE_H
+
 #include <iostream>
 #include <string>
-#include<stdexcept>
+#include <stdexcept>
 using namespace std;
 
 
@@ -43,5 +46,6 @@ private:
 };
 
 
+#include "minqueue.cpp"
 
-
+#endif

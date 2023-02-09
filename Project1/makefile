@@ -1,11 +1,12 @@
 GCC = g++ -std=c++11
-PROGS = driver
 
-driver: test_minqueue.o
-	$(GCC) -o driver test_minqueue.o
-	
-test.o: test.cpp minqueue.h minqueue.cpp 
-	$(GCC) -c test_minqueue.cpp
+
+test: test_minqueue.cpp
+	$(GCC) -o test test_minqueue.cpp
+
+usecase: main.cpp
+	$(GCC) -o usecase main.cpp
 
 clean:
-	rm $(PROGS)
+	rm test;
+	rm usecase;
