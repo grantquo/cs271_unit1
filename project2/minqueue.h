@@ -10,7 +10,7 @@ using namespace std;
 
 #define DEFAULT_LIST_CAPACITY 10
 
-template <class T> 
+template <class T>
 class MinQueue
 {
 public:
@@ -18,10 +18,10 @@ public:
 		   ~MinQueue		( void );
             MinQueue     	(T*A , int n);
     void    insert     		(const T &item);
-    void 	heapify    		(int id ) ; 
-	string	to_string		( void ) const;	
+    void 	min_heapify    	(int id ) ;
+	string	to_string		( void ) const;
 	T &		operator[]		( int index );
-	void    build_min_heap 	(void)  ;
+	void    build_heap 		(void)  ;
 	T     	min             (void) ;
 	T     	extract_min     (void) ;
 	void 	decrease_key    (int id , T k);

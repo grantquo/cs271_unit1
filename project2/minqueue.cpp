@@ -4,7 +4,7 @@
 #include <utility>
 #include <stdexcept>
 
-using namespace std; 
+using namespace std;
 
 //======================================================
 // MinQueue
@@ -12,7 +12,7 @@ using namespace std;
 // PARAMS:
 //      none
 // RETURN VALUES:
-//      Doesn't return anything. Creates an empty minimum 
+//      Doesn't return anything. Creates an empty minimum
 //      priority queue.
 //======================================================
 template <class T>
@@ -21,7 +21,7 @@ MinQueue<T> :: MinQueue (void){
     list = new T[DEFAULT_LIST_CAPACITY];
     capacity = DEFAULT_LIST_CAPACITY;
     size = 0 ;
-    
+
 }
 
 //======================================================
@@ -30,8 +30,8 @@ MinQueue<T> :: MinQueue (void){
 // PARAMS:
 //      none
 // RETURN VALUES:
-//      Doesn't return anything. Performs a deletion of 
-//      the minimum queue, freeing previously stored 
+//      Doesn't return anything. Performs a deletion of
+//      the minimum queue, freeing previously stored
 //      memory.
 //======================================================
 template <class T>
@@ -52,25 +52,25 @@ MinQueue<T> :: ~MinQueue (void){
 //      priority queue with n values from T *A.
 //======================================================
 template <class T>
-MinQueue<T> :: MinQueue (T*A, int n){
+MinQueue<T> :: MinQueue ( T*A, int n){
     list = new T[n];
     capacity = n ;
     size = n;
     for(int i =0 ;i<size;i++){
        list[i] = *(A+i);
     }
-    build_min_heap();
+    build_heap();
 }
 
 //======================================================
 // insert
-// An insertion function that adds a value into the 
+// An insertion function that adds a value into the
 // priority queue.
 // PARAMS:
 //      const T &item: item of data type T that will be
 //      added into the queue.
 // RETURN VALUES:
-//      Doesn't return anything. Adds a new item that is 
+//      Doesn't return anything. Adds a new item that is
 //      stored inside the queue.
 //======================================================
 template <class T>
@@ -104,24 +104,24 @@ template <class T>
 }
 
 //======================================================
-// heapify
+// min_heapify
 // Heap function that follows the min-heap property where
 // the passed element is organized. Other values
 // are arranged in accordance with the property.
 // PARAMS:
 //      int id: Element that is made the root of the heap
 // RETURN VALUES:
-//      Doesn't return anything. Instead orders the 
-//      priority queue and its values by the min-heap 
+//      Doesn't return anything. Instead orders the
+//      priority queue and its values by the min-heap
 //      property.
 //======================================================
 template <class T>
- void MinQueue<T> :: heapify (int id){
+ void MinQueue<T> :: min_heapify (int id){
     //cout << size <<endl;
     int l = 2*id +1 ;
     int r = 2*id + 2 ;
     //cout << a[l <<" "<<r<<endl;
-    int smallest ; 
+    int smallest ;
     if(l < size && list[l] <  list[id]){
         smallest = l ;
     }
@@ -134,7 +134,7 @@ template <class T>
         swap(list[id],list[smallest]);
         //cout << size <<endl;
        // cout <<endl;
-       if (smallest < size ) heapify(smallest);
+       if (smallest < size ) min_heapify(smallest);
     }
 }
 
@@ -184,30 +184,30 @@ string MinQueue<T> :: to_string (void)  const {
 template <class T>
 T& MinQueue<T>:: operator[] ( int index ){
     if(index >= capacity){
-        cout <<"Error! Index not in capacity range!"<<endl;
+        cout <<"Error"<<endl;
     }
     return *(list+index);
 }
 
 //======================================================
-// build_min_heap
+// build_heap
 // Builds a heap within the priority queue. This only
-// builds the heap and calls heapify() to organize it 
+// builds the heap and calls min_heapify() to organize it
 // by each item.
 // PARAMS:
 //      none
 // RETURN VALUE:
-//      Does not return anything. Calls the heapify() 
-//      function to organize the values according to 
+//      Does not return anything. Calls the min_heapify()
+//      function to organize the values according to
 //      min-heap properties.
 //======================================================
 template <class T>
-void  MinQueue<T>::  build_min_heap( void){
+void  MinQueue<T>::  build_heap( void){
    // cout << size <<endl;
    size = capacity;
   // size = capacity;
    for (int i = size/2 -1;i >= 0;i--){
-        heapify(i);
+        min_heapify(i);
    }
 }
 
@@ -228,7 +228,7 @@ T MinQueue<T>::  min( void){
 
 //======================================================
 // extract_min
-// Finds and removes the smallest value in the queue. 
+// Finds and removes the smallest value in the queue.
 // PARAMS:
 //      none
 // RETURN VALUES:
@@ -249,7 +249,7 @@ T  MinQueue<T>::  extract_min     (void){
   else  {
     list[0] = list[size-1];
     size -- ;
-    heapify(0);
+    min_heapify(0);
   }
   return val ;
 }
@@ -285,12 +285,12 @@ void   MinQueue<T>::  decrease_key     (int id , T k){
 
 //======================================================
 // sort
-// Takes an array containing values in a min-heap and 
+// Takes an array containing values in a min-heap and
 // sorts all of the values in the array in ascending order.
 // PARAMS:
 //      T *A: An array of values with data type T
 // RETURN VALUES:
-//      Doesn't return anything. Calls heapify() to 
+//      Doesn't return anything. Calls min_heapify() to
 //      perform sorting following the min-heap property.
 //      Sorts the values in the array A with min-heap values
 //      in ascending order.
@@ -302,7 +302,7 @@ void   MinQueue<T>::  sort    (T*A){
     for(int i = val-1 ;i >0;i--){
         swap(list[0],list[i]);
         size -- ;
-        heapify(0);
+        min_heapify(0);
     }
     size = val ;
     T*ls = new T[capacity];
@@ -332,7 +332,7 @@ int MinQueue<T>:: len ( void){
 
 //======================================================
 // set
-// Finds a value in a specified index and changes it to 
+// Finds a value in a specified index and changes it to
 // a different value.
 // PARAMS:
 //      int id: Integer representing the index of a value
@@ -340,7 +340,7 @@ int MinQueue<T>:: len ( void){
 //      T k: Item of data type k that will change a value
 //      in the queue.
 // RETURN VALUES:
-//      Doesn't return anything. Changes a value to k in 
+//      Doesn't return anything. Changes a value to k in
 //      index id.
 //======================================================
 template <class T>
@@ -357,7 +357,7 @@ void   MinQueue<T>::  set    (int id , T k){
 // allocate
 // Allocates more space into the queue by a specified number.
 // PARAMS:
-//      int n: Integer that adds more spaces for values to 
+//      int n: Integer that adds more spaces for values to
 //      be stored in the queue.
 // RETURNS:
 //      Doesn't return anything. Allocates more space into
