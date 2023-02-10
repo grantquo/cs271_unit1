@@ -2,7 +2,7 @@
 //  test_minqueue_example.cpp
 //  Priority Queue Project
 //
-//  Created by Stacey Truex
+//  Created by Grant Gutterman and Dong Tran
 //
 #include <iostream>
 #include "minqueue.cpp"
